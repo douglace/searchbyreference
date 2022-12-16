@@ -25,3 +25,31 @@
 * Don't forget to prefix your containers with your own identifier
 * to avoid any conflicts with others containers.
 */
+
+window.addEventListener('DOMContentLoaded', function(e) {
+    if(typeof product_reference != 'undefined' && product_reference) {
+        setReference(product_reference)
+    }
+});
+
+function setReference(ref = "") {
+    let p = document.querySelector('#main .reference');
+    let pArr = p.innerHTML.split(':')
+    p.innerHTML = pArr[0] + ": " + ref
+}
+
+if (typeof prestashop !== 'undefined') {
+    prestashop.on(
+      'updatedProduct',
+      async function (event) {
+        if(ref_link && product_id) {
+            let id_product_attribute = event.id_product_attribute || 0;
+            let res = await fetch(ref_link+'?id_product='+product_id+'&id_product_attribute='+id_product_attribute)
+            ref = await res.json()
+            if(ref && typeof ref.reference != "undefined") {
+                setReference(ref.reference)
+            }
+        }
+      }
+    );
+}

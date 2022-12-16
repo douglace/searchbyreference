@@ -1,0 +1,15 @@
+{
+    "name": "cleandev/searchbyreference",
+    "autoload": {
+        "psr-4": {
+            "Cleandev\\Searchbyreference\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "vexi",
+            "email": "kvdouglace@gmail.com"
+        }
+    ],
+    "require": {}
+}
